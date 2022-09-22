@@ -1,0 +1,31 @@
+
+
+
+```{r setup}
+knitr::opts_knit$set(root.dir = here::here())
+```
+
+
+```{r}
+
+
+tar_manifest(contains("plots"))
+
+tar_read(plots_lastweek_forecast_M3_2017)$plots$density
+
+tar_read(post_check_M3_2017)[[1]]
+```
+
+
+
+
+
+# Forecast plots
+```{r}
+for (i in 1:8){ 
+    tar_read(plots_lastweek_forecast_M3_2017)$plots$density[[i]]
+    tar_read(plots_lastweek_forecast_M3v2_2017)$plots$density[[i]]
+    tar_read(plots_lastweek_forecast_M3v3_2017)$plots$density[[i]]
+}
+
+```

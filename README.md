@@ -1,2 +1,2 @@
-# stinkbug_targets
-stink bug population dynamics state space model
+# stinkbug_targets_nn
+SSMs for stinkbug population dynamics

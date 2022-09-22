@@ -1,0 +1,24 @@
+```{r}
+ (ridgeplot <- ggplot(
+    data = ridgeplot_data_merged,
+      aes(
+        x = bF_post_samples, 
+        y = locality, fill = ..x..
+      )
+    ) +
+    geom_density_ridges_gradient(scale = 3, rel_min_height = 0.01) +
+    scale_fill_viridis(name = "Post", option = "A") +
+    coord_cartesian(xlim = c(-0.5, 0.5)) +
+    labs(
+      title = "bF Localidad",
+      x = "Posterior"
+    ) +
+    theme_bw(base_size = bs) +
+    theme(
+      legend.position = "none",
+      axis.title.y = element_blank(),
+      axis.text.y = element_text(angle = 45),
+      plot.title = element_text(size = 9)
+    )
+  )
+```

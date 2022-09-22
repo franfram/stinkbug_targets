@@ -1,0 +1,14 @@
+---
+title: "project_description"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Describe briefly how target works and explain the main functions to use. Namely, tar_manifest(), tar_visnetwork(), tar_read(), tar_make().
+
+Describe the most important targets, use groupings such as: raw data files, wrangled data, models used, model fit summaries, post checks, forecasts, etc.
+
+Check how you can render an rmd file or a script to show the functions.

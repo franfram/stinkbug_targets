@@ -1,0 +1,137 @@
+---
+title: "Untitled"
+output: pdf_document
+---
+
+para realizar las tareas computacionalmente demandantes del proyecto (analisis de incertidumbre, evaluación de poder predictivo a lo largo de toda la serie temporal y estimación de la cantidad de semanas mínimas necesarias para realizar predicciones con niveles de incertidumbre aceptables) se realizarán con computadoras del equipo. Una vez realizados estos, se contruirá un pipeline paralelo que permita hacer predicciones con menor poder de cómputo, que pueda correrse en un servidor o una computadora de recursos medios. 
+
+
+In other words we can think of the small world/observational model as a flexible
+model that can be contorted into multiple configurations, each of which might 
+approximate different features of the true data generating process better or worse.
+
+
+
+
+
+
+
+Cosas a realizar:
+
+
+- New models:
+Los modelos previos tienen una estructura matemática basada en una distribución
+de probabilidad Binomial y una Poisson. Ésta estructura de base supone que 
+la cantidad de paños semanales es constante y dificulta el manejo de semanas
+en las cuales no se tomaron datos. 
+Los nuevos modelos tendrán una estructura matemática basada en distribuciones de
+probabilidad Normales. Esto va a permitir que nuestros modelos sean más flexibles,
+permitiendo distintos tamaños muestrales en distintas semanas y simplifica el 
+manejo de semanas con datos faltantes. 
+
+
+
+
+
+
+
+
+
+
+- New software (JAGS vs Stan)
+TL;DR
+Stan es un software más avanzado que JAGS. Permite un mejor ajuste de los modelos
+y mejor diagnósticos de cuándo y cómo los modelos fallan. 
+
+
+- LFO-CV (Model comparison and next-week predictive accuracy as a function of time-series length)
+
+Leave Future Out Cross Validation (LFO-CV) es una medida del poder predictivo de
+un modelo que contempla la estructura temporal de los datos. Utilizar el mismo
+para comparar el desempeño de los distintos modelos permite tener una mejor
+idea de qué modelos predicen mejor que otros. Soluciona el problema de LOO y WAIC, 
+que tienen el mismo objetivo pero al no contemplar la estructura temporal de los
+datos, tienden a dar resultados sesgados (e.g., suponen que el modelo que mejor
+predice es uno distinto al que en la realidad mejor predice). 
+A su vez, LFO-CV permite evaluar el desempeño de las predicciones de un modelo 
+a las X semanas siguientes a lo largo de toda la serie temporal. Esto permite
+evaluar el desempeño del modelo en todas las etapas del ciclo de cultivo, en vez
+de en únicamente la última semana de los datos. Al mismo tiempo, permite evaluar
+la capacidad predictiva para la siguiente semana como función de la longitud de
+la serie temporal de los datos. Esto permite determinar la longitud de serie 
+temporal mínima para hacer predicciones aceptables. Por ejemplo, el resultado de
+LFO-CV podría mostrar que en las primeras 2 semanas de monitoreos de una temporada,
+los modelos no hacen buenas predicciones por falta de datos, pero que a partir 
+de la 4ta semana de datos los modelos empiezan a hacer buenas predicciones. 
+Esto, sumado al análisis de incertidumbre en función del tamaño muestral (el 
+cual permite determinar la cantidad de paños mínimos semanales que son necesarios
+para que el modelo haga buenas predicciones), va a permitir tener una buena 
+noción de bajo qué circunstancias los modelos hacen buenas predicciones (i.e., 
+cantidad de paños por semana necesarios y cantidad de semanas de datos necesarios). 
+
+
+Bayesian Model Averaging using LFO weights. 
+
+Distintos modelos predictivos de dinámica chinches capturan distintas características
+del funcionamiento del sistema natural en estudio (siendo practicamente imposible
+tener un modelo que capture perfectamente todas las características del functionamiento 
+del sistema. Por ejemplo, algunos modelos
+pueden capturar mejor el proceso de explosión poblacional durante la fructificación,
+mientras que otros pueden capturar mejor la implosión poblacional durante R8 (aclarar). 
+En consecuencia, elegir "el mejor modelo" (el que hace mejores predicciones
+**en general**) para hacer predicciones implica necesariamente
+perder la capacidad de capturar ciertas características del sistema y por lo tanto 
+de poder predecir correctamente algunas situaciones o tiempos de la serie temporal. 
+Ej, un modelo puede ser el que mejores predicciones haga en promedio pero puede
+que sus predicciones bajo ciertas condiciones (e.g., estadio fenológico R4) no 
+sean las mejores. Al mismo tiempo, puede que haya otro modelo que no es el que hace
+las mejores predicciones en promedio pero que haga las mejores predicciones en R4. 
+Bayesian Model Averaging es una metodología que permite atacar este problema, y 
+consiste en asignar distintos puntajes a los modelos en cuestión en base a cuán 
+buenas sean sus predicciones en distintos escenarios, y luego hacer un promedio 
+ponderado (donde el puntaje del modelo implica su peso en el promedio) para 
+obtener una predicción que contemple los mejores aspectos de cada uno de los modelos. 
+
+
+El entorno computacional reproducible tiene dos objetivos. 
+1. Asegurar la estabilidad del proyecto a través del tiempo. Debido al rápido 
+avance en los distintos softwares que son utilizados, un problema común en este
+tipo de trabajos es que lo que funciona hoy con ciertas versiones de los software,
+tiende a dejar de funcionar más adelante cuando las versiones cambian. 
+2. Permitir el uso de centros con alto poder de cómputo. La investigación 
+necesaria para llevar a cabo el proyecto requiere de un poder de cómputo muy alto.
+Esto obliga a pasar el procesamiento de los modelos de nuestras computadores personales
+a otros centros de cómputo. Debido a las variaciones tecnológicas entre nuestras
+computadoras personales y las de los centros de cómputo, es necesario tener un
+entonrno computacional reproducible y encapsulado para llevar a cabo dicha tarea.
+Una vez realizadas las investigaciones, el mismo entorno computacional reproducible
+se utilizará para crear una versión del proyecto que pueda correr en computadoras
+menos avanzadas. 
+
+
+
+
+Requisitos: 
+publicar 2 papers con código. 
+El código es propietario nuestro, Nosotros ofrecemos el servicio. 
+
+
+ 
+- Pipeline. 
+
+
+
+
+<center>
+![FigName](logo_r_graph_gallery.jpg)
+</center>
+
+
+
+```{r}
+library(png)
+library(grid)
+img <- readPNG("kan.png")
+grid.raster(img)
+```
+
